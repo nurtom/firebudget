@@ -22,30 +22,47 @@ const columns: GridColDef[] = [
     disableColumnMenu: true,
   },
   { field: "payee", headerName: "Payee", sortable: false },
-  { field: "comment", headerName: "Comment", width: 300, sortable: false },
-  { field: "category", headerName: "Categorie", sortable: false },
+  {
+    field: "comment",
+    headerName: "Comment",
+    width: 300,
+    sortable: false,
+    renderCell: (params: GridRenderCellParams<string>) => <i>{params.value}</i>,
+  },
+  { field: "category", headerName: "Categorie", width: 200, sortable: false },
   {
     field: "amount",
     headerName: "Amount",
     sortable: false,
     type: "number",
+    disableColumnMenu: true,
     renderCell: (params: GridRenderCellParams<number>) => {
       console.log(params);
       return (
-        <Chip
-          label={`${params.value},00 €`}
-          color={params.value >= 0 ? "success" : "error"}
-          variant={params.row.approved ? "outlined" : "filled"}
-        />
+        <Typography variant="body1" color={params.value >= 0 ? "green" : "red"}>
+          <b>{`${params.value},00 €`}</b>
+        </Typography>
+        // <Chip
+        //   label={`${params.value},00 €`}
+        //   color={params.value >= 0 ? "success" : "error"}
+        //   variant={params.row.approved ? "outlined" : "filled"}
+        // />
       );
     },
+  },
+  {
+    field: "approved",
+    headerName: "Approved",
+    sortable: false,
+    type: "boolean",
+    disableColumnMenu: true,
   },
 ];
 
 const rows: Data[] = [
   {
     id: 1,
-    category: "Food",
+    category: "Household/Food",
     date: new Date(),
     account: "Checking",
     payee: "Payee 1",
@@ -55,7 +72,7 @@ const rows: Data[] = [
   },
   {
     id: 2,
-    category: "Food",
+    category: "Household/Food",
     date: new Date(),
     account: "Checking",
     payee: "Payee 2",
@@ -65,7 +82,7 @@ const rows: Data[] = [
   },
   {
     id: 3,
-    category: "Insurance",
+    category: "Mobility / Car Insurance",
     date: new Date(),
     account: "Checking",
     payee: "Payee 3",
@@ -75,7 +92,7 @@ const rows: Data[] = [
   },
   {
     id: 4,
-    category: "Car",
+    category: "Mobility / Car Gas",
     date: new Date(),
     account: "Checking",
     payee: "Payee 4",

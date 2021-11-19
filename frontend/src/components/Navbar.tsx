@@ -1,5 +1,15 @@
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
-import { AppBar, Button, Tab, Tabs, Toolbar, Typography } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import {
+  AppBar,
+  Button,
+  Tab,
+  Tabs,
+  Toolbar,
+  Typography,
+  Box,
+  IconButton,
+} from "@mui/material";
 import * as React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -13,8 +23,16 @@ export default function Navbar() {
   return (
     <AppBar position="fixed">
       <Toolbar variant="dense">
-        <LocalFireDepartmentIcon />
-        <Typography variant="h6" component="div">
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          component={RouterLink}
+          to="/"
+        >
+          <LocalFireDepartmentIcon />
+        </IconButton>
+        <Typography variant="h6" component="div" sx={{ marginRight: "20px" }}>
           FireBudget
         </Typography>
         <Tabs
@@ -24,11 +42,15 @@ export default function Navbar() {
           onChange={handleChange}
           sx={{ flexGrow: 1 }}
         >
-          <Tab label="Home" component={RouterLink} to="/" />
           <Tab label="Budget" component={RouterLink} to="/budget" />
+          <Tab label="BudgetMoves" component={RouterLink} to="/budgetmoves" />
+          <Tab label="Accounts" component={RouterLink} to="/accounts" />
           <Tab label="Transactions" component={RouterLink} to="/transactions" />
+          <Tab label="Investments" component={RouterLink} to="/investments" />
         </Tabs>
-        <Button color="inherit">Logout</Button>
+        <IconButton size="large" color="inherit">
+          <PersonIcon />
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
